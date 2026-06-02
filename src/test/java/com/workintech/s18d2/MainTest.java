@@ -3,8 +3,8 @@ package com.workintech.s18d2;
 import com.workintech.s18d2.entity.Fruit;
 import com.workintech.s18d2.entity.FruitType;
 import com.workintech.s18d2.entity.Vegetable;
-import com.workintech.s18d2.exceptions.PlantException;
-import com.workintech.s18d2.repository.FruitRepository;
+import com.workintech.s18d2.exceptions.ApiException;
+import com.workintech.s18d2.dao.FruitRepository;
 import com.workintech.s18d2.services.FruitServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -106,16 +106,16 @@ class MainTest {
         vegetable.setId(2L);
         vegetable.setName("Carrot");
         vegetable.setPrice(20.0);
-        vegetable.setGrownOnTree(false);
+        vegetable.setIsGrownOnTree(false);
 
         assertEquals(2L, vegetable.getId());
         assertEquals("Carrot", vegetable.getName());
         assertEquals(20.0, vegetable.getPrice());
-        assertFalse(vegetable.isGrownOnTree());
+        assertFalse(vegetable.getIsGrownOnTree());
 
 
-        vegetable.setGrownOnTree(true);
-        assertTrue(vegetable.isGrownOnTree());
+        vegetable.setIsGrownOnTree(true);
+        assertTrue(vegetable.getIsGrownOnTree());
     }
 
     @Test
@@ -158,7 +158,7 @@ class MainTest {
     void testGetByIdNotFoundFruitService() {
         when(mockFruitRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        assertThrows(PlantException.class, () -> fruitService.getById(1L));
+        assertThrows(ApiException.class, () -> fruitService.getById(1L));
     }
 
     @Test
