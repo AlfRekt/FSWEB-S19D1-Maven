@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vegetables")
+@RequestMapping("/vegetable")
 public class VegetableController {
     private VegetableService vegetableService;
 
